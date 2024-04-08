@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0">
+	<title>
+		IntelliOps Maturity Model
+	</title>
+	{% include 'common/header.html' %}
+	<style>
+
+		/* Styling the Body element i.e. Color, 
+		Font, Alignment */ 
+		body {
+			background-color: #e3e6e5;
+			font-family: Verdana;
+			text-align: center;
+		}
+
+		/* Styling the Form (Color, Padding, Shadow) */
+		form {
+			background-color: #fff;
+			max-width: 900px;
+			margin: 50px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+		}
+
+		/* Styling form-control Class */
+		.form-control {
+			text-align: left;
+			margin-bottom: 25px;
+		}
+
+		/* Styling form-control Label */ 
+		.form-control label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		/* Styling form-control input, 
+		select, textarea */
+		.form-control input,
+		.form-control select,
+		.form-control textarea {
+			border: 1px solid #777;
+			border-radius: 2px;
+			font-family: inherit;
+			padding: 10px;
+			display: block;
+			width: 95%;
+		}
+
+		/* Styling form-control Radio 
+		button and Checkbox */
+		.form-control input[type="radio"],
+		.form-control input[type="checkbox"] {
+			display: inline-block;
+			width: auto;
+		}
+
+		/* Styling Button */
+		button {
+			background-color: #e3e6e5;
+			border: 1px solid #777;
+			border-radius: 2px;
+			font-family: inherit;
+			font-size: 21px;
+			display: block;
+			width: 100%;
+			margin-top: 50px;
+			margin-bottom: 20px;
+		}
+
+		.question{
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		.answer{
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		.header{
+			font-size: 16px;
+			background-color: #c9cfc9;
+			padding: 5px;
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>IntelliOps Maturity Model Assesment</h1>
+
+	<!-- Create Form -->
+	<form id="form" action="{{ url_for('quest', entity_id=entity_id) }}" method="post">
+
+		<!-- Details -->
+		<div class="form-control">
+			<label for="label-meta-1" id="label-name" class="question">
+				Name
+			</label>
+
+			<!-- Input Type Text -->
+			<input class="answer" type="text" name="name"
+				id="label-meta-1"
+				placeholder="Enter your name" required />
+		</div>
+
+		<div class="form-control">
+			<label for="label-meta-2" id="label-email" class="question">
+				Email
+			</label>
+
+			<!-- Input Type Email-->
+			<input  class="answer" type="email"  name="email"
+				id="label-meta-2"
+				placeholder="Enter your email" required />
+		</div>
+
+		<div class="form-control">
+			<label for="label-meta-4" id="label-email" class="question">
+				Refered By
+			</label>
+
+			<!-- Input Type Email-->
+			<input  class="answer" type="text"  name="refered_by"
+				id="label-meta-4"
+				placeholder="Give the name of person who refer this tool" />
+		</div>
+
+		<div style="display: none;" class="form-control">
+			<label for="label-meta-3" id="label-role" class="question">
+				Industry
+			</label>
+			
+			<!-- Dropdown options -->
+			<select name="industry" id="label-meta-3" class="answer">
+				<option value="none">-- Choose an option --</option>
+				<option value="education">Education</option>
+				<option value="energy">Energy</option>
+				<option value="finance">Financial Services</option>
+				<option value="government">Government</option>
+				<option value="healthcare">Healthcare &amp; Pharmaceuticals</option>
+				<option value="industrials">Industrials &amp; Manufacturing</option>
+				<option value="insurance">Insurance</option>
+				<option value="media">Media/Entertainment</option>
+				<option value="nonprofit">Non-profit</option>
+				<option value="retail">Retail/Consumer/e-Commerce</option>
+				<option value="technology">Technology</option>
+				<option value="telecoms">Telecommunications</option>
+				<option value="other">Other</option>
+			</select>
+		</div>
+
+
+		{% for question in questions %}
+			{% if loop.index == 1 or questions[loop.index - 1].question_id != questions[loop.index - 2].question_id %}
+
+			{% if loop.index == 1 or questions[loop.index - 1].category != questions[loop.index - 2].category %}
+				<h2 class="header">{{ question.category }}</h2>
+			{% endif %}
+				<div class="form-control">
+					<label class="question">
+						{{ question.question }}
+					</label>
+			{% endif %}
+					<label for="label-field-{{ question.answer_id }}"  class="answer">
+						<input type="radio"
+							id="label-field-{{ question.answer_id }}"
+							name="question_{{ question.question_id }}" 
+							value="{{ question.answer_id }}"
+							{% if question.is_default == 1 %} checked{% endif %}>{{ question.answer }}</input>
+					</label>
+			{% if loop.index == questions|length or questions[loop.index - 1].question_id != questions[loop.index].question_id %}
+				</div>
+			{% endif %}
+		{% endfor %}
+
+
+		<!-- Multi-line Text Input Control -->
+		<button type="submit" value="submit">
+			Submit
+		</button>
+	</form>
+</body>
+</html>
+

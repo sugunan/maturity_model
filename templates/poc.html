@@ -1,0 +1,36 @@
+<div id="scene">
+    <img id="jesus" src="jesus.png">
+    <img id="soldier1" src="soldier.png">
+    <img id="soldier2" src="soldier.png">  
+  </div>
+  
+  <script>
+  var scene = document.getElementById("scene");
+  var jesus = document.getElementById("jesus");
+  var soldier1 = document.getElementById("soldier1");
+  var soldier2 = document.getElementById("soldier2");
+  
+  // Position images  
+  jesus.style.position = "absolute";
+  jesus.style.left = "0px";
+  jesus.style.top = "0px";
+  
+  soldier1.style.position = "absolute";
+  soldier1.style.left = "100px";
+  soldier1.style.top = "50px";
+  
+  soldier2.style.position = "absolute"; 
+  soldier2.style.left = "200px";
+  soldier2.style.top = "100px";
+  
+  // Animate movement
+  var left = 0; 
+  function frame() {
+    left += 1; 
+    jesus.style.left = left + "px";
+    
+    requestAnimationFrame(frame);
+  }
+  
+  frame();
+  </script>

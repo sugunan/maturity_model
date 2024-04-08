@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IntelliOps Maturity Model</title>
+	
+    <style>
+		body {
+			background-color: #e3e6e5;
+			font-family: Verdana;
+			text-align: center;
+		}
+
+		.body-wrap {
+			background-color: #fff;
+			max-width: 900px;
+			margin: 50px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+		}
+
+        td {
+            text-align: left;
+        }
+
+		.header {
+			font-size: 16px;
+			text-align: left;
+		}
+
+		.top-line {
+			width: 100px;
+			border-bottom: #FFB901 3px solid;
+		}
+
+		.bottom-line {
+			border-bottom: #FFB901 1px solid;
+			margin-top: 350px;
+		}
+
+        .contact{
+			font-size: 11px;
+			text-align: left;
+			width: 500px;
+			padding: 10px;
+			margin-top: 10px;
+			float: right;
+		}
+		.contact span{
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+    
+    <h1>IntelliOps Maturity Model Assessment Results</h1>
+	<div class="body-wrap" >
+        <div class="top-line">&nbsp;</div>
+		<h1 class="header">IntelliOps Maturity Model Assessment</h1>
+		<table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Survey Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.survey_name }}</td>
+                    <td><a href="{{ url_for('score', entity_id=row.uid, survey_id=row.sid) }}" target="_blank">View Score</a></td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+		<div class="bottom-line">&nbsp;</div>
+		<div class="contact">
+			Please contact Virtusa Managed Service SL for a detailed analysis and next steps. <br>
+			<span>(Inder - inderjeetsaidhi@virtusa.com, Misnad - MHaque@virtusa.com)</span>
+		</div>
+		<div style="height: 40px;">&nbsp;</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		IntelliOps Maturity Model
+	</title>
+	
+    <style>
+
+		/* Styling the Body element i.e. Color, 
+		Font, Alignment */ 
+		body {
+			background-color: #e3e6e5;
+			font-family: Verdana;
+			text-align: center;
+		}
+
+		/* Styling the Form (Color, Padding, Shadow) */
+		.body-wrap {
+			background-color: #fff;
+			max-width: 900px;
+			margin: 50px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+		}
+
+        td{
+            text-align: left;
+        }
+
+		.header{
+			font-size: 16px;
+			text-align: left;
+		}
+		.message-green{
+			font-size: 12px;
+			background-color: #a7d1a7;
+			padding: 5px;
+			color: #023613;
+		}
+		.amber-text{
+			color: #FFB901;
+		}
+		.top-line{
+			width: 100px;
+			border-bottom: #FFB901 3px solid;
+		}
+		.bottom-line{
+			border-bottom: #FFB901 1px solid;
+			margin-top: 350px;
+		}
+		.left-pannel{
+			float: left;
+			width: 535px;
+			min-height: 300px;
+		}
+		.right-pannel{
+			float: right;
+			width: 350px;
+			min-height: 300px;
+		}
+		.table-header{
+			background: #000000;
+			color: #fff;
+			font-size: 14px;
+			font-weight: normal;
+			padding-left: 5px;
+		}
+		table{
+			border-spacing: unset;
+		}
+		.level{
+			background: #51F2B8;
+		}
+		.legend-pannel{
+			    background: #51F2B8;
+    color: #000;
+    font-size: 10px;
+    padding: 10px;
+    width: 125px;
+    margin-top: 10px;
+		}
+		.yourscore-pannel{
+			background: #EE4AA3;
+			width: 110px;
+			float: left;
+			color: #FFF;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 20px;
+		}
+		.currentlevel-pannel{
+			background: #0088FE;
+			width: 110px;
+			float: left;
+			color: #FFF;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 20px;
+			margin-left: 20px;
+		}
+		.yourscore-pannel span, .currentlevel-pannel span{
+			font-size: 12px;
+			font-weight: normal;
+		}
+		.suggestion-pannel1{
+			margin-top: 90px;
+		}
+		.suggestion-pannel1, .suggestion-pannel2, .suggestion-pannel3{
+			text-align: left;
+		}
+		.suggestion-pannel1 h2, .suggestion-pannel2 h2, .suggestion-pannel3 h2{
+			font-size: 12px;
+		}
+		.suggestion-pannel1 li, .suggestion-pannel2 li, .suggestion-pannel3{
+			font-size: 12px;
+		}
+		.participant{
+			font-size: 11px;
+			float: left;
+			text-align: left;
+			width: 350px;
+			color: #999;
+			background: #eee;
+			padding: 10px;
+			margin-top: 10px;
+		}
+		.contact{
+			font-size: 11px;
+			text-align: left;
+			width: 500px;
+			padding: 10px;
+			margin-top: 10px;
+			float: right;
+		}
+		.contact span{
+			font-style: italic;
+		}
+		.indicater{
+			width: 25px;
+			height: 80px;
+			position: absolute;
+			background-color: rgba(0, 0, 0, 0.2);
+			border: 2px solid #ee4a4a;
+			padding: 20px;
+			margin-left: {{ score.pointer_margin }}px;
+    		margin-top: -10px;
+		}
+	</style>
+</head>
+<body>
+    
+    <h1>IntelliOps Maturity Model Assesment Results</h1>
+	<!-- Create Form -->
+	<div class="body-wrap" >
+        <!--<h2 class="message-green">Thank you for your input. We will contact you with the detailed analysis and opportunities. here's how you've scored.</h2>-->
+        <div class="top-line">&nbsp;</div>
+		<h1 class="header">IntelliOps <span class="amber-text">Maturity Model Assessment</span></h1>
+		<div class="left-pannel">
+			<div class="indicater">&nbsp;</div>
+			<table border="0">
+				<thead>
+					<tr>
+						<th width="230">&nbsp;</th>
+						<th width="60" class="table-header">Level 1</th>
+						<th width="60" class="table-header">Level 2</th>
+						<th width="60" class="table-header">Level 3</th>
+						<th width="60" class="table-header">Level 4</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="table-header">Site Reliability Engineering</td>
+						<td class="{% if score['SRE'] and score['SRE']['weightage_label']|int > 0 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['SRE'] and score['SRE']['weightage_label']|int > 1 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['SRE'] and score['SRE']['weightage_label']|int > 2 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['SRE'] and score['SRE']['weightage_label']|int > 3 %}level{% endif %}">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="table-header">AIOps</td>
+						<td class="{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 0 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 1 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 2 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 3 %}level{% endif %}">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="table-header">Generative AI</td>
+						<td class="{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 0 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 1 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 2 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 3 %}level{% endif %}">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="table-header">Automation</td>
+						<td class="{% if score['Automation'] and score['Automation']['weightage_label']|int > 0 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['Automation'] and score['Automation']['weightage_label']|int > 1 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['Automation'] and score['Automation']['weightage_label']|int > 2 %}level{% endif %}">&nbsp;</td>
+						<td class="{% if score['Automation'] and score['Automation']['weightage_label']|int > 3 %}level{% endif %}">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="legend-pannel">
+				Current Maturity Level
+			</div>
+			{% if score.min_score < 4 %}
+			<div class="suggestion-pannel3">
+				<h2>Top Areas, you need to work in your estate to get in to Level {{ score.min_score + 1 }}</h2>
+				<ol>
+				{% if score['SRE']['weightage_label'] < 4 %}
+					{% set index = score['SRE']['weightage_label'] + 1 %}
+					{% set sre_imp_value = score['sre_imp'][index] %}
+					<li>SRE - {{ sre_imp_value }}</li>
+				{% endif %}
+				{% if score['AIOps']['weightage_label'] < 4 %}
+					{% set index = score['AIOps']['weightage_label'] + 1 %}
+					{% set aiops_imp_value = score['aiops_imp'][index] %}
+					<li>AIOps - {{ aiops_imp_value }}</li>
+				{% endif %}
+				{% if score['Gen AI']['weightage_label'] < 4 %}
+					{% set index = score['Gen AI']['weightage_label'] + 1 %}
+					{% set genai_imp_value = score['genai_imp'][index] %}
+					<li>Gen AI - {{ genai_imp_value }}</li>
+				{% endif %}
+				{% if score['Automation']['weightage_label'] < 4 %}
+					{% set index = score['Automation']['weightage_label'] + 1 %}
+					{% set automation_imp = score['automation_imp'][index] %}
+					<li>Automation - {{ automation_imp }}</li>
+				{% endif %}
+				</ol>
+			</div>
+			{% endif %}
+		</div>
+		<div class="right-pannel">
+			<div class="yourscore-pannel">
+				{{ score.total_score }}%
+				<br><span>Your Score</span>
+			</div>
+			<div class="currentlevel-pannel">
+				Level {{ score.min_score }}
+				<br><span>Current Level</span>
+			</div>
+			<div class="suggestion-pannel1">
+				<h2>Key insights from the survey on current estate</h2>
+				<ol>
+					<li>The current state should have a {{ score.sre_tco[score['SRE']['weightage_label']] }} Total Cost of Ownership (TCO) with {{ score.sre_her[score['SRE']['weightage_label']] }} human error reduction</li>
+					<li>The current state should exhibit {{ score.aiops_cr[score['AIOps']['weightage_label']] }} change velocity, {{ score.aiops_cr_leadtime[score['AIOps']['weightage_label']] }} lead time for change, and a {{ score.aiops_cr_failtire_rate[score['AIOps']['weightage_label']] }} change failture rate with {{ score.aiops_mtbf[score['AIOps']['weightage_label']] }} Mean Time Between Failture (MTBF)</li>
+					<li>The current state should have a {{ score.genai_preemp_inc[score['Gen AI']['weightage_label']] }} incidence of preemting incidents, {{ score.genai_mttr[score['Gen AI']['weightage_label']] }} Mean Time to Repair (MTTR), and {{ score.genai_mttd[score['Gen AI']['weightage_label']] }} Mean Time to Detect (MTTD)</li>
+					<li>The current state should have {{ score.auto_productivity[score['Automation']['weightage_label']] }} operational productivity and {{ score.genai_sme[score['Automation']['weightage_label']] }} dependence on Subject Matter Experts (SMEs)</li>
+				</ol>
+			</div>
+		</div>
+		<div class="bottom-line">&nbsp;</div>
+		<div class="participant">
+			Participant Name: {{user.name}}<br>
+			Email Address: {{user.email}}
+		</div>
+		<div class="contact">
+			Please contact Virtusa Managed Service SL for a detailed analysis and next steps. <br>
+			<span>(Inder - inderjeetsaidhi@virtusa.com, Misnad - MHaque@virtusa.com)</span>
+		</div>
+		<div style="height: 40px;">&nbsp;</div>
+    </div>
+</body>
+</html>

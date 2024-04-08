@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maturity Model Score Pie Chart</title>
+    <!-- Include Plotly JS library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Maturity Model Score Pie Chart</h1>
+    <!-- Display the Plotly Pie chart -->
+    <div id="plotly-chart"></div>
+
+    <script>
+        // JavaScript code to render the Plotly Pie chart
+        var chartData = {{ chart_data | safe | tojson }};
+console.log(chartData);
+        Plotly.newPlot('plotly-chart', chartData);
+    </script>
+</body>
+</html>
