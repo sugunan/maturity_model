@@ -4,9 +4,9 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 # Configure MySQL
-app.config['MYSQL_HOST'] = 'aiops.test.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = 'Virtu#test'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'admin'
 app.config['MYSQL_DB'] = 'survey'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -15,7 +15,7 @@ mysql = MySQL(app)
 # Routes
 @app.route('/')
 def index():
-    return redirect(url_for('quest', entity_id=5))
+    return redirect(url_for('assesment', entity_id=5))
 
 @app.route('/add', methods=['POST'])
 def add():
@@ -61,8 +61,8 @@ def delete(user_id):
 
     return redirect(url_for('index'))
 
-@app.route('/quest/<int:entity_id>', methods=['GET', 'POST'])
-def quest(entity_id):
+@app.route('/assesment/<int:entity_id>', methods=['GET', 'POST'])
+def assesment(entity_id):
     cur = mysql.connection.cursor()
     cur.execute('SELECT q.id AS question_id, q.question, q.category, q.question_order, q.question_type, a.id AS answer_id, a.answer, a.answer_order, a.is_default FROM answer AS a LEFT JOIN question AS q ON a.question_id = q.id WHERE q.survey_id = %s ORDER BY q.question_order ASC, a.answer_order ASC', (entity_id,))
     questions = cur.fetchall()
