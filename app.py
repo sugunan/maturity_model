@@ -4,9 +4,9 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 # Configure MySQL
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'admin'
+app.config['MYSQL_HOST'] = 'aiops.ca7zbewmumiq.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'admin'
+app.config['MYSQL_PASSWORD'] = 'Virtu#2023AIOps'
 app.config['MYSQL_DB'] = 'survey'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -109,7 +109,7 @@ def assesment(entity_id):
 
         return redirect(url_for('score', entity_id=user_id, survey_id=entity_id))
 
-    return render_template('quest.html', questions=questions, entity_id=entity_id)
+    return render_template('survey.html', questions=questions, entity_id=entity_id)
 
 @app.route('/score/<int:entity_id>/<int:survey_id>')
 def score(entity_id,survey_id):
@@ -170,17 +170,17 @@ def score(entity_id,survey_id):
 
     score_dict['pointer_margin'] = 230
     if score_dict['my_score'] == 1:
-        score_dict['pointer_margin'] = 230
+        score_dict['pointer_margin'] = 165
     elif score_dict['my_score'] == 2:
-        score_dict['pointer_margin'] = 297
+        score_dict['pointer_margin'] = 240
     elif score_dict['my_score'] == 3:
-        score_dict['pointer_margin'] = 363
+        score_dict['pointer_margin'] = 320
     elif score_dict['my_score'] == 4:
-        score_dict['pointer_margin'] = 430
+        score_dict['pointer_margin'] = 395
 
     
 
-    return render_template('score.html', score=score_dict, user=user)
+    return render_template('results.html', score=score_dict, user=user)
     
 
 @app.route('/list_reports', methods=['GET'])
@@ -189,8 +189,8 @@ def list_reports():
     cur.execute("SELECT u.id AS uid, u.name, u.email, s.id AS sid, s.survey_name FROM question_answer AS qa LEFT JOIN answer AS a ON qa.answer_id = a.id LEFT JOIN question AS q ON a.question_id = q.id LEFT JOIN survey AS s ON q.survey_id = s.id LEFT JOIN users AS u ON qa.user_id = u.id WHERE u.name <> '' AND u.email <> '' GROUP BY u.id, s.id")
     rows = cur.fetchall()
     cur.close()
-    return render_template('list_report.html', rows=rows)
+    return render_template('list.html', rows=rows)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=3003, debug=True)
