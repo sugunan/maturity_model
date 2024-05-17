@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+
+/* General Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 20%, rgba(255,255,255,1) 30%), url('{{ url_for('static', filename='img/TopBackground.jpg') }}');
+    background-size: 100% auto;
+    background-position: center;
+    background-color: #f1f1f1;
+}
+
+
+/* Form Styles */
+#regForm {
+  background-color: #ffffff;
+    font-family: "Open Sans";
+    padding: 40px;
+    border-radius: 20px;
+
+}
+#regForm table {
+    margin: 0 auto;
+     /* Center the table horizontally within the form */
+}
+
+h1 {
+    text-align: center;  
+}
+
+
+button {
+    background-color: #04AA6D;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: "Open Sans";
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+.form-group {
+    margin-bottom: 20px; 
+}
+
+.form-check {
+  display: flex; /* Use flexbox to align items */
+  align-items: left; /* Align items vertically */
+  margin-left: 0; /* Reset margin */
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.form-check-label {
+    font-family: "Open Sans";
+    padding-left: 5px;
+    padding-top: 10px;
+    letter-spacing: 0;
+}
+
+.form-check-input {
+    position: absolute; /* Set position absolute */
+    left: -360px; /* Position the radio button to the left */
+    top: 50%; /* Align vertically in the middle */
+    margin-right: 10px; /* Add some space between radio button and label */
+    padding-left: 5px;
+    transform: translateY(-50%);
+}
+
+
+/* Header Styles */
+.HeaderTop {
+    background-color: #36312D;
+    color: white;       
+    padding: 10px 10%;
+    position: relative;
+}
+
+.HeaderTop img {
+    max-width: 100%;
+}
+
+.HeaderBottom {
+    height: 100px;
+    width: 100%;
+    padding-top: 30px;
+    margin: auto 25%;
+    height: 61px;
+    width: 860px;
+    color: #212529;
+    font-family: "Open Sans";
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 60px;
+}
+
+/* Footer Styles */
+footer {
+    position: relative;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer img {
+    max-width: 100%;
+    height: 60px;
+}
+
+/* Grey Color Bar */
+.grey-bar {
+    background-color: #36312D; 
+    height: 150px; 
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 9999; 
+}
+
+/* Adjusted Styles */
+.TitleHeader {
+    background-color: #43C0FF;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.TitleHeader h3 {
+    margin: 0;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+}
+
+.Spc30 {
+    margin-top: 30px;
+}
+
+.FormTitle {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.FormDivider {
+    display: flex;
+    flex-direction: column;
+}
+.intelli-ops-maturity {
+  color: #212529;
+  font-family: "Publico Headline Web";
+  font-size: 20px;
+  font-weight: bold;
+}
+.rectangle-copy-77 {
+  height: 212px;
+  width: 300px;
+  border-radius: 4px;
+  background-color: #EFEFEF;
+  transform: translateY(-50%);
+  z-index: -1;
+  position: absolute;
+  
+}
+.site-reliability-eng {
+  height: 24px;
+  width: 268px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.intelli-ops-maturity-1 {
+  height: 1px;
+  width: 1000px;
+  color: #000000;
+  font-family: "Open Sans bold";
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: -50px; /* Add or adjust margin as needed */
+}
+.ai-ops {
+  height: 24px;
+  width: 268px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.generative-ai {
+  height: 24px;
+  width: 268px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.automation {
+  height: 24px;
+  width: 268px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  
+}
+.rectangle-copy {
+  position: relative;
+  height: 56px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #5E71EA;
+}
+.level-1 {
+  height: 24px;
+  width: 70px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  padding-top: 1px;
+  padding-left: 8px;
+}
+.rectangle-4 {
+  box-sizing: border-box;
+  height: 296px;
+  width: 134px;
+  border: 4px solid #FF3939;
+  border-radius: 8px;
+}
+.level-3 {
+  height: 24px;
+  width: 69.61px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  padding-top: 1px;
+  padding-left: 6px;
+}
+.rectangle-copy-9 {
+  height: 56px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #192B9E;
+}
+.rectangle-copy-10 {
+  height: 56px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #09187C;
+  padding-inline: 25px;
+}
+.level-4 {
+  height: 24px;
+  width: 69.61px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  padding-top: 1px;
+}
+.rectangle-copy-4 {
+  height: 47px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #51F2B8;
+}
+.rectangle-copy-3 {
+  height: 47px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #51F2B8;
+}
+.rectangle-copy-2 {
+  height: 47px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #51F2B8;
+}
+.rectangle-copy-1 {
+  height: 47px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #51F2B8;
+}
+.rectangle-copy-44 {
+  height: 48px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #0D9061;
+}
+.rectangle-copy-3 {
+  height: 48px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #0D9061;
+}
+.rectangle-copy-5 {
+  height: 48px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #055538;
+}
+.rectangle-5 {
+  height: 287px;
+  width: 220px;
+  border-radius: 8px;
+  background-color: #A825DB;
+  position:absolute;
+  transform: scale(113%) translate(25px, -87px);
+}
+.trophy {
+  position: relative;
+  height: 80px;
+  width: 80px;
+  transform: scale(250%) translate(40px, -20px);
+  z-index: 1;
+}
+.f46 {
+  position: absolute;
+  height: 74px;
+  width: 123px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 60px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 72px;
+  transform: scale(100%) translate(0px, 80px);
+}
+
+.your-score {
+  position: absolute;
+  height: 24px;
+  width: 107px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+  transform: scale(150%) translate(10px, 100px);
+}
+.rectangle-6 {
+  height: 287px;
+  width: 220px;
+  border-radius: 8px;
+  background-color: #5E71EA;
+  position:absolute;
+  transform: scale(113%) translate(180px, -87px);
+}
+
+.medal {
+  position: relative;
+  height: 80px;
+  width: 80px;
+  transform: scale(250%) translate(107px, -20px);
+  z-index: 1;
+}
+.level-2-2 {
+  position: absolute;
+  height: 72px;
+  width: 168px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 72px;
+  transform: scale(100%) translate(160px, 80px);
+
+}
+.current-level {
+  position:absolute;
+  height: 24px;
+  width: 128px;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+  transform: scale(150%) translate(115px, 100px);
+
+}
+.rectangle-copy-11 {
+  height: 56px;
+  width: 253px;
+  border-radius: 28px;
+  background-color: #51F2B8;
+}
+.current-maturity-lev {
+  width: 183px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  text-align: left;
+  padding-left: 10px;
+
+}
+.rectangle-copy-7 {
+  height: 47px;
+  width: 80.05px;
+  border-radius: 4px;
+  background-color: #17BA7F;
+}
+.rectangle-CurrentMaturityLevel {
+  height: 37px;
+  width: 65.05px;
+  border-radius: 4px;
+  transform: translate(175px,-40px);
+}
+.bg-level-1 {
+  background-color: #51F2B8;
+}
+.bg-level-2 {
+  background-color: #17BA7F;
+}
+.bg-level-3 {
+  background-color: #0D9061;
+}
+.bg-level-4 {
+  background-color: #055538;
+}
+.level-2 {
+  height: 24px;
+  width: 56px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  transform: translate(183px,-48px);  
+}
+.key-insights-from-th {
+  height: 24px;
+  width: 1271px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.rectangle-copy-6 {
+  height: 48px;
+  width: 1344px;
+  border-radius: 4px;
+  background-color: #43C0FF;
+}
+
+.the-current-state-sh {
+  height: 24px;
+  width: 1297px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.oval {
+  height: 11px;
+  width: 11px;
+  background-color: #09187C;
+}
+.oval-copy {
+  height: 11px;
+  width: 11px;
+  background-color: #09187C;
+}
+.the-current-state-sh-1 {
+  height: 48px;
+  width: 1297px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.accepted-copy-5-back {
+  height: 20px;
+  width: 20px;
+  transform: rotate(-180deg);
+}
+.rectangle-copy-6-1 {
+  height: 48px;
+  width: 1344px;
+  border-radius: 4px;
+  background-color: #43C0FF;
+}
+.top-areas-you-need {
+  height: 24px;
+  width: 1272px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.accepted-copy-4-back {
+  height: 20px;
+  width: 20px;
+  transform: rotate(-270deg);
+}
+.rectangle-copy-55 {
+  height: 48px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #17BA7F;
+}
+.rectangle-copy-level2 {
+  height: 56px;
+  width: 122.43px;
+  border-radius: 4px;
+  background-color: #3649CB;
+}
+table {
+    border-collapse: collapse;
+    width: 10%;
+    height: 50%;
+    transform: scale(0.62) translate(-300px, 20px); /* Adjust the height as needed */
+    margin: 0 auto;
+}
+
+th, td {
+    padding-left: 1px;
+    border: 0;
+}
+
+tr {
+    border-spacing: 10px; /* Adjust this value to decrease space between rows */
+}
+
+
+/*  background color of first column*/
+tr:not(:first-child) td:first-child {
+    background-color: rgb(239, 234, 234);
+    background: linear-gradient(to right, rgba(242, 238, 238, 0.788) 20%, rgb(242, 238, 238, 0.788) 80%);
+    border-radius: 2px;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+
+/* Download button*/
+.download-pdf {
+  height: 25px;
+  width: 1005;
+  color: #000000;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.rectangle-copy-downloadpdf {
+  height: 35px;
+  width: 180px;
+  padding: 1px 25px;
+  border-radius: 28px;
+  background-color: #51F2B8;
+  transform:translate(650px, 40px); /* Adjust the height as needed */
+
+}
+
+/* Style the accordion container */
+.accordion {
+  background-color: #43C0FF;
+  color: #212529;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  height: 38px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: "Open Sans";
+  transition: 0.4s;
+}
+
+/*.active, .accordion:hover {
+  background-color: #84d6ff;
+}*/
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: left;
+  margin-left: 5px;
+  padding-right: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.body-wrap{
+    margin: 0 auto;
+    width: 900px;
+}
+
+.header-wrap{
+    margin: 0 auto;
+    width: 900px;
+}
+
+.indicater{
+			width: 80px;
+			height: 210px;
+			position: absolute;
+			background-color: rgba(0, 0, 0, 0.2);
+			border: 2px solid #ee4a4a;
+			padding: 20px;
+			margin-left: {{ score.pointer_margin }}px;
+    		margin-top: 70px;
+        z-index:2;
+		}
+
+    .footer-wrap{
+    margin: 0 auto;
+    width: 850px;
+    color: #aaaaaa;
+    font-family: "Open Sans";
+    padding-top: 45px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+.footer-wrap-float-right{
+    float: right;
+    width: 430px;
+}
+
+.footer-wrap-float-left{
+    float: left;
+    width: 400px;
+}
+</style>
+<body>
+  <div class="HeaderTop">
+    <div class="header-wrap"> <img src="{{ url_for('static', filename='img/virtusa.png') }}" alt="Virtusa Logo"></div>
+</div>
+
+<div class="body-wrap">
+
+<div class="intelli-ops-maturity">
+  <h1>IntelliOps Maturity Model Assessment Results</h1>
+</div>
+
+
+<form id="regForm">
+    <div class="intelli-ops-maturity-1">
+        <h4>IntelliOps Maturity Model Assessment</h4>
+    </div>
+
+
+      <button class="rectangle-copy-downloadpdf">
+        <div class="download-pdf">DOWNLOAD PDF</div>
+      </button>
+
+      <div>
+        <div class="indicater">&nbsp;</div>
+        <table>
+            <tr>
+                <th></th>
+                <th><div class="rectangle-copy"><div class="level-1"><p>Level 1</p></div></div></th>
+                <th><div class="rectangle-copy-level2"><div class="level-3"><p>Level 2</p></div></div></th>
+                <th><div class="rectangle-copy-9"><div class="level-3"><p>Level 3</p></div></div></th>
+                <th><div class="rectangle-copy-10"><div class="level-4"><p>Level 4</p></div></div></th>
+                <td rowspan="5">
+                        <div class="rectangle-5"></div>
+                        <img src="{{ url_for('static', filename='img/TrophyIcon.png') }}" alt="trophyimage" class="trophy">           
+                        <label class="f46">{{ score.total_score }}%</label>  
+                        <label class="your-score">Your Score</label>        
+                </td>
+               
+                <td rowspan="5"> 
+                    <div class="rectangle-6"></div>
+                    <img src="{{ url_for('static', filename='img/MedalIcon.png') }}" alt="medalimage" class="medal">  
+                    <label class="level-2-2">Level {{ score.my_score }}</label>  
+                    <label class="current-level">Current Level</label>                  
+                </td>
+            </tr>
+            <tr>
+                <td><div class="site-reliability-eng"><p>Site Reliability Engineering</p></div></td>
+                <td>{% if score['SRE'] and score['SRE']['weightage_label']|int > 0 %}<div class="rectangle-copy-4"><p></p></div>{% endif %}</td>
+                <td>{% if score['SRE'] and score['SRE']['weightage_label']|int > 1 %}<div class="rectangle-copy-55"><p></p></div>{% endif %}</td>
+                <td>{% if score['SRE'] and score['SRE']['weightage_label']|int > 2 %}<div class="rectangle-copy-44"><p></p></div>{% endif %}</td>
+                <td>{% if score['SRE'] and score['SRE']['weightage_label']|int > 3 %}<div class="rectangle-copy-5"><p></p></div>{% endif %}</td>
+
+            </tr>
+            <tr>
+                <td><div class="ai-ops"><p>AIOps</p></div></td>
+                <td>{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 0 %}<div class="rectangle-copy-4"><p></p></div>{% endif %}</td>
+                <td>{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 1 %}<div class="rectangle-copy-55"><p></p></div>{% endif %}</td>
+                <td>{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 2 %}<div class="rectangle-copy-44"><p></p></div>{% endif %}</td>
+                <td>{% if score['AIOps'] and score['AIOps']['weightage_label']|int > 3 %}<div class="rectangle-copy-5"><p></p></div>{% endif %}</td>
+            </tr>
+            <tr>
+                <td><div class="generative-ai"><p>Generative AI</p></div></td>
+                <td>{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 0 %}<div class="rectangle-copy-4"><p></p></div>{% endif %}</td>
+                <td>{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 1 %}<div class="rectangle-copy-55"><p></p></div>{% endif %}</td>
+                <td>{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 2 %}<div class="rectangle-copy-44"><p></p></div>{% endif %}</td>
+                <td>{% if score['Gen AI'] and score['Gen AI']['weightage_label']|int > 3 %}<div class="rectangle-copy-5"><p></p></div>{% endif %}</td>
+
+            </tr>
+            <tr>
+                <td><div class="automation"><p>Automation</p></div></td>
+                <td>{% if score['Automation'] and score['Automation']['weightage_label']|int > 0 %}<div class="rectangle-copy-4"><p></p></div>{% endif %}</td>
+                <td>{% if score['Automation'] and score['Automation']['weightage_label']|int > 1 %}<div class="rectangle-copy-55"><p></p></div>{% endif %}</td>
+                <td>{% if score['Automation'] and score['Automation']['weightage_label']|int > 2 %}<div class="rectangle-copy-44"><p></p></div>{% endif %}</td>
+                <td>{% if score['Automation'] and score['Automation']['weightage_label']|int > 3 %}<div class="rectangle-copy-5"><p></p></div>{% endif %}</td>
+            </tr>
+        </table>
+    </div>
+
+
+<div class="current-maturity-lev"><p>Current Maturity Level</p></div>
+<div class="rectangle-CurrentMaturityLevel bg-level-{{ score.my_score }}"></div></td>
+<div class="level-2 "><p>Level {{ score.my_score }}</p></div>
+
+<button class="accordion">Key insights from the survey on current estate</button>
+    <div class="panel">
+      <ul>
+        <li>The current state should have a {{ score.sre_tco[score['SRE']['weightage_label']] }} Total Cost of Ownership (TCO) with {{ score.sre_her[score['SRE']['weightage_label']] }} human error reduction</li>
+				<li>The current state should exhibit {{ score.aiops_cr[score['AIOps']['weightage_label']] }} change velocity, {{ score.aiops_cr_leadtime[score['AIOps']['weightage_label']] }} lead time for change, and a {{ score.aiops_cr_failtire_rate[score['AIOps']['weightage_label']] }} change failture rate with {{ score.aiops_mtbf[score['AIOps']['weightage_label']] }} Mean Time Between Failture (MTBF)</li>
+				<li>The current state should have a {{ score.genai_preemp_inc[score['Gen AI']['weightage_label']] }} incidence of preemting incidents, {{ score.genai_mttr[score['Gen AI']['weightage_label']] }} Mean Time to Repair (MTTR), and {{ score.genai_mttd[score['Gen AI']['weightage_label']] }} Mean Time to Detect (MTTD)</li>
+				<li>The current state should have {{ score.auto_productivity[score['Automation']['weightage_label']] }} operational productivity and {{ score.genai_sme[score['Automation']['weightage_label']] }} dependence on Subject Matter Experts (SMEs)</li>
+			</ul>
+    </div>
+    {% if score.my_score < 4 %}
+    <button class="accordion">Top Areas, you need to work in your estate to get in to Level {{ score.my_score + 1 }}</button>
+    <div class="panel">
+      <ul>
+        {% for item in score.recomendation %}
+					<li>{{ item.recomendation }}</li>
+				{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+</form>
+</div>
+</div>
+  
+
+
+
+
+
+
+
+
+  <!-- Image bar at the bottom -->
+  <footer>
+  <img src="{{ url_for('static', filename='img/BottomBar.jpg') }}" alt="Image Bar">
+  </footer>
+
+   <!-- Grey color bar -->
+   <div class="grey-bar">
+    <div class="footer-wrap">
+      <div class="footer-wrap-float-left">
+        Participant Name: {{user.name}}<br>
+			Email Address: {{user.email}}
+      </div>
+      <div class="footer-wrap-float-right">
+        <strong>Please contact Virtusa Managed Service SL for a detailed analysis and next steps. </strong><br>
+        <strong>Inder -</strong> inderjeetsaidhi@virtusa.com, <strong>Misnad -</strong> MHaque@virtusa.com
+      </div>
+    </div>
+   </div>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var accordions = document.querySelectorAll(".accordion");
+
+  accordions.forEach(function(accordion) {
+    accordion.addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent default behavior
+
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  });
+});
+
+</script> 
+  
+ 
+  
+
+</body>
+</html>

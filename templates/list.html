@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+
+/* General Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 20%, rgba(255,255,255,1) 30%), url('{{ url_for('static', filename='img/TopBackground.jpg') }}');
+    background-size: 100% auto;
+    background-position: center;
+    background-color: #f1f1f1;
+}
+
+/* Form Styles */
+#regForm {
+  background-color: #ffffff;
+  font-family: "Open Sans";
+  padding: 40px;
+  border-radius: 20px;
+}
+#regForm table {
+    margin: 0 auto;
+     /* Center the table horizontally within the form */
+}
+
+h1 {
+    text-align: center;  
+}
+/* Header Styles */
+.HeaderTop {
+    background-color: #36312D;
+    color: white;       
+    padding: 10px 10%;
+    position: relative;
+}
+
+.HeaderTop img {
+    max-width: 100%;
+}
+
+.HeaderBottom {
+    height: 100px;
+    width: 100%;
+    padding-top: 30px;
+    margin: auto 25%;
+    height: 61px;
+    width: 860px;
+    color: #212529;
+    font-family: "Publico Headline Web";
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 60px;
+}
+
+/* Footer Styles */
+footer {
+    position: relative;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer img {
+    max-width: 100%;
+    height: 60px;
+}
+
+/* Grey Color Bar */
+.grey-bar {
+    background-color: #36312D; 
+    height: 150px; 
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 9999; 
+}
+
+/* Adjusted Styles */
+.TitleHeader {
+    background-color: #43C0FF;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.TitleHeader h3 {
+    margin: 0;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+}
+
+.Spc30 {
+    margin-top: 30px;
+}
+
+.FormTitle {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.FormDivider {
+    display: flex;
+    flex-direction: column;
+}
+.intelli-ops-maturity {
+  color: #212529;
+  font-family: "Publico Headline Web";
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.site-reliability-eng {
+  height: 24px;
+  width: 268px;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.intelli-ops-maturity-1 {
+  height: 100px;
+  width: 1000px;
+  color: #000000;
+  font-family: "Open Sans bold";
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: -50px; /* Add or adjust margin as needed */
+  transform: translateX(15px);
+}
+
+.column-ractangle {
+  text-align: center;
+  height: 36px;
+  width: 180px;
+  padding: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  background-color: #192B9E;
+  display: inline-block; 
+}
+.column-names {
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 0px;
+
+}
+.card {
+  text-align: center;
+  height: 36px;
+  width: 180px;
+  padding: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  background-color: #EFEFEF;
+  display: inline-block;
+}
+.card-inputs{
+  text-align: left;
+  color: #212529;
+  font-family: "Open Sans";
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: 0px;
+}
+
+.view-score {
+  text-align: center;
+  color: #087BED;
+  font-family: "Open Sans";
+  letter-spacing: 0;
+  line-height: 0px;
+  text-decoration: none;
+  
+}
+.view-score .custom-link {
+  color: #087BED; /* Set link color */
+  text-decoration: none; /* Remove default underline */
+  
+}
+.view-score .custom-link:hover {
+  cursor: pointer;
+  color: #087BED; /* Set link color on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.combined-shape {
+  width: 16px;
+  transform: rotate(-180deg);
+  background-color: #087BED;
+}
+
+.body-wrap{
+    margin: 0 auto;
+    width: 850px;
+}
+
+.header-wrap{
+    margin: 0 auto;
+    width: 850px;
+}
+
+.footer-wrap{
+    margin: 0 auto;
+    width: 850px;
+    color: #aaaaaa;
+    font-family: "Open Sans";
+    padding-top: 45px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+.footer-wrap-float-right{
+    float: right;
+    width: 430px;
+}
+
+.footer-wrap-float-left{
+    float: left;
+    width: 400px;
+}
+
+
+
+</style>
+<body>
+  <div class="HeaderTop">
+    <div class="header-wrap"><img src="{{ url_for('static', filename='img/virtusa.png') }}" alt="Virtusa Logo"></div>
+</div>
+<div class="body-wrap">
+<div class="intelli-ops-maturity">
+    <h1>IntelliOps Maturity Model Assessment Results</h1>
+</div>
+
+
+<form id="regForm">
+    <div class="intelli-ops-maturity-1">
+        <h4>IntelliOps Maturity Model Assessment</h4>
+    </div>
+
+    <table>
+        <tr>
+          <td class="column-ractangle">
+            <h3 class="column-names">Name</h3>
+          </td>
+          <td class="column-ractangle">
+            <h3 class="column-names">Email</h3>
+          </td>
+          <td class="column-ractangle">
+            <h3 class="column-names">Survey Name</h3>
+          </td>
+          <td class="column-ractangle">
+            <h3 class="column-names">Action</h3>
+          </td>
+        </tr>
+        {% for row in rows %}
+        <tr>
+          <td class="card">
+            <h3 class="card-inputs">{{ row.name }}</h3>
+          </td>
+          <td class="card">
+            <h3 class="card-inputs">{{ row.email }}</h3>
+          </td>
+          <td class="card">
+            <h3 class="card-inputs">{{ row.survey_name }}</h3>
+          </td>
+          <td class="card">
+            <a href="{{ url_for('score', entity_id=row.uid, survey_id=row.sid) }}" class="card-inputs view-score custom-link">View Score &#x2192 </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+  
+</form>
+</div>
+
+</div>
+  
+
+
+
+
+
+
+
+
+  <!-- Image bar at the bottom -->
+  <footer>
+  <img src="{{ url_for('static', filename='img/BottomBar.jpg') }}" alt="Image Bar">
+  </footer>
+
+   <!-- Grey color bar -->
+   <div class="grey-bar">
+    <div class="footer-wrap">
+      <div class="footer-wrap-float-left"></div>
+      <div class="footer-wrap-float-right">
+        <strong>Please contact Virtusa Managed Service SL for a detailed analysis and next steps. </strong><br>
+        <strong>Inder -</strong> inderjeetsaidhi@virtusa.com, <strong>Misnad -</strong> MHaque@virtusa.com
+      </div>
+    </div>
+   </div>
+
+
+
+<script></script> 
+  
+
+
+
+    
+  
+
+</body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+
+/* General Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 20%, rgba(255,255,255,1) 30%), url('{{ url_for('static', filename='img/TopBackground.jpg') }}');
+    background-size: 100% auto;
+    background-position: center;
+    background-color: #f1f1f1;
+}
+
+/* Form Styles */
+#regForm {
+    background-color: #ffffff;
+    font-family: "Open Sans";
+    padding: 40px;
+    border-radius: 20px;
+}
+
+h1 {
+    text-align: center;  
+}
+
+input {
+    padding: 10px;
+    width: calc(100% - 22px); 
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+.tab {
+    display: none;
+}
+
+button {
+    /*background-color: #04AA6D;*/
+    border-color: #04AA6D;
+    color: #0f0e0e;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: "Open Sans";
+    cursor: pointer;
+    border: 1px solid #43C0FF;
+    border-radius: 28px;
+    box-sizing: border-box;
+    height: 46px;
+  width: 153px;
+    
+}
+
+button:hover {
+    opacity: 0.8;
+    background-color: #dadbdc; /* Color when hovered */
+
+}
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+.step.finish {
+    background-color: #04AA6D;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-check {
+  display: flex; /* Use flexbox to align items */
+  align-items: left; /* Align items vertically */
+  margin-left: 0; /* Reset margin */
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.form-check-label {
+    font-family: "Open Sans";
+    padding-left: 5px;
+    padding-top: 10px;
+    letter-spacing: 0;
+}
+
+.form-check-input {
+    position: absolute; /* Set position absolute */
+    left: -360px; /* Position the radio button to the left */
+    top: 50%; /* Align vertically in the middle */
+    margin-right: 10px; /* Add some space between radio button and label */
+    padding-left: 5px;
+    transform: translateY(-50%);
+}
+
+
+/* Header Styles */
+.HeaderTop {
+    background-color: #36312D;
+    color: white;       
+    padding: 10px 10%;
+    position: relative;
+}
+
+.HeaderTop img {
+    max-width: 100%;
+}
+
+.HeaderBottom {
+    height: 100px;
+    width: 100%;
+    padding-top: 30px;
+    margin: auto 25%;
+    height: 61px;
+    width: 860px;
+    color: #212529;
+    font-family: "Publico Headline Web";
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 60px;
+}
+
+/* Footer Styles */
+footer {
+    position: relative;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer img {
+    max-width: 100%;
+    height: 60px;
+}
+
+/* Grey Color Bar */
+.grey-bar {
+    background-color: #36312D; 
+    height: 150px; 
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 9999; 
+}
+
+/* Adjusted Styles */
+.TitleHeader {
+    background-color: #43C0FF;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.TitleHeader h3 {
+    margin: 0;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+}
+
+.Spc30 {
+    margin-top: 30px;
+}
+
+.FormTitle {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.NotCheckedOne {
+    background-color: #e7e7e7;
+    font-weight: 400;
+    color: black;
+}
+
+.form-check {
+    position: relative; /* Set position relative */
+    margin-left: 25px; /* Adjust margin */
+    padding: 4px 35px;
+    border-radius: 4px;
+    margin: 10px 0;
+    background-color: #e7e7e7;  /* options box color */
+}
+.form-control {
+    border: 1px solid #00AAFF;
+    height: 38px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: "Open Sans";
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    color: #5E5A57;
+
+}
+
+input[type="radio"]:checked + .form-check {
+    background-color: #09187C; 
+    border-color: #43C0FF;
+    color: white;
+}
+
+.progress {
+    margin-top: 30px;
+}
+.progress-bar {
+    position: absolute;
+    top: 218px;
+    left: 182px;
+    height: 20px;
+    width: 0; /* Initially, the progress bar width is 0 */
+    background-color: #51F2B8;
+    border-radius: 3px;
+  }
+
+/* Wizard Navigation */
+.wizard-navigation {
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    z-index: 999; 
+}
+
+.wizard-navigation button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #43C0FF;
+    color: white;
+    font-family: "Open Sans";
+    cursor: pointer;
+}
+
+.previous-button {
+    margin-right: auto; 
+    height: fit-content;
+    transform: translateX(-300%);
+}
+
+.next-button {
+    margin-left: auto;
+    height: fit-content;
+    transform: translateX(-15%);
+}
+
+.submit-btn {   
+    position: relative;
+    align-items: center;
+    width: auto; 
+    border-top: 1px solid #ccc;
+    z-index: 999; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #43C0FF;
+    color: white;
+    font-family: "Open Sans";
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 56px;
+    width: 800px;
+    border: 1px solid #51F2B8;
+    border-radius: 28px;
+    background-color: #51F2B8;
+}
+
+.submit-container {
+    position: relative;
+    bottom: -10px;
+    right: -200px;
+    align-items: center;
+    width: calc(100% - 40px);
+    padding: 0 20px;
+}
+.FormDivider {
+    display: flex;
+    flex-direction: column;
+}
+.completed {
+  color: green; /* Change color to green */
+  /* Add any other styles to indicate completion */
+}
+.intelli-ops-maturity {
+  color: #212529;
+  font-family: "Publico Headline Web";
+  font-size: 20px;
+  font-weight: bold;
+}
+
+  /* adding main tabs to top*/
+
+.tab-link {
+  display: none; /* Initially hide tab links */
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+
+
+.tab-link.active {
+  color: #000000;
+  font-weight: bolder;
+
+}
+
+.tab-rectangle {
+  text-align: center;
+  height: 35px;
+  width: 165px;
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  color: #2d1f1f;
+  padding: 10px 10px;
+  font-size: 16px;
+  font-family: "Open Sans";
+  letter-spacing: 0;
+  cursor: default;
+  }
+
+.tab-rectangle.active {
+  background-color: #43C0FF;
+}
+
+.selected {
+  background-color: #09187C;
+  color: white;
+}
+
+.body-wrap{
+    margin: 0 auto;
+    width: 850px;
+}
+
+.header-wrap{
+    margin: 0 auto;
+    width: 850px;
+}
+
+.footer-wrap{
+    margin: 0 auto;
+    width: 850px;
+    color: #aaaaaa;
+    font-family: "Open Sans";
+    padding-top: 45px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+.footer-wrap-float-right{
+    float: right;
+    width: 430px;
+}
+
+.footer-wrap-float-left{
+    float: left;
+    width: 400px;
+}
+
+</style>
+<body>
+    <div class="HeaderTop">
+        <div class="header-wrap"><img src="{{ url_for('static', filename='img/virtusa.png') }}" alt="Virtusa Logo"></div>
+    </div>
+
+<div class="body-wrap">
+    <div class="intelli-ops-maturity"><h1>IntelliOps Maturity Model Assessment</h1></div>
+
+    <form id="regForm" action="{{ url_for('assesment', entity_id=entity_id) }}" method="post">
+    
+    <!-- One "tab" for each step in the form: -->
+    <div class="tab">
+        <!-- Your form inputs -->
+        <div class="form-group">
+        <label for="Name"><b>Name</b></label>
+        <input name="name" type="Name" class="form-control" id="Name" aria-describedby="emailHelp" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+        <label for="exampleInputEmail1"><b>Email</b></label>
+        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+        </div>
+        <div class="form-group">
+        <label for="exampleInputPassword1"><b>Referred By</b></label>
+        <input name="refered_by" type="text" class="form-control" id="exampleInputPassword1" placeholder="Referred By">
+        </div>
+    </div>
+    
+    <div class="tabs">
+        <span class="tab-link tab-rectangle">SRE</span>
+        <span class="tab-link tab-rectangle">AIOps</span>
+        <span class="tab-link tab-rectangle">Gen AI</span>
+        <span class="tab-link tab-rectangle">Automation</span>
+    </div>
+
+        {% for question in questions %}
+			{% if loop.index == 1 or questions[loop.index - 1].question_id != questions[loop.index - 2].question_id %}
+
+			{% if loop.index == 1 or questions[loop.index - 1].category != questions[loop.index - 2].category %}
+            <div class="tab">
+                <div class="FormDivider">
+			{% endif %}
+            <div class="form-group">
+                <p><b>{{ question.question }}</b></p>
+			{% endif %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_{{ question.question_id }}" id="exampleRadios1.{{ question.answer_id }}" value="{{ question.answer_id }}" {% if question.is_default == 1 %} checked{% endif %}>
+                        <label class="form-check-label" for="exampleRadios1.{{ question.answer_id }}">
+                            {{ question.answer }}
+                        </label>
+                    </div>
+			{% if loop.index == questions|length or questions[loop.index - 1].question_id != questions[loop.index].question_id %}
+                </div>
+			{% endif %}
+            {% if loop.index == questions|length or questions[loop.index - 1].category != questions[loop.index].category %}
+            </div>
+            </div>
+			{% endif %}
+		{% endfor %}        
+
+
+
+    <div style="overflow:auto;">
+        <div style="float:right;">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="previous-button">Previous</button>
+        <button type="button" id="nextBtn" onclick="nextPrev(1)" class="next-button">Next</button>
+        </div>
+    </div>
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px; display: none;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+    </div>
+    </form>
+</div>
+  <!-- Image bar at the bottom -->
+  <footer>
+  <img src="{{ url_for('static', filename='img/BottomBar.jpg') }}" alt="Image Bar">
+  </footer>
+
+   <!-- Grey color bar -->
+   <div class="grey-bar">
+    <div class="footer-wrap">
+      <div class="footer-wrap-float-left"></div>
+      <div class="footer-wrap-float-right">
+        <strong>Please contact Virtusa Managed Service SL for a detailed analysis and next steps. </strong><br>
+        <strong>Inder -</strong> inderjeetsaidhi@virtusa.com, <strong>Misnad -</strong> MHaque@virtusa.com
+      </div>
+    </div>
+   </div>
+
+<script>
+ // Get all radio buttons
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+// Add change event listener to each radio button
+radioButtons.forEach(radioButton => {
+    radioButton.addEventListener('change', function() {
+        const formCheck = this.closest('.form-check');
+        if (formCheck) {
+            // Reset background color and font color for all options
+            const allOptions = formCheck.parentNode.querySelectorAll('.form-check');
+            allOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Set background color and font color for the selected option
+            formCheck.classList.add('selected');
+        }
+    });
+});
+
+
+
+/* ---------------------------------------script for adding new tabs */
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n);
+  // If it's not the first page, show the tab links
+  if (n > 0) {
+    showTabLinks();
+  }
+  // Highlight the corresponding tab link
+  highlightTabLink(n);
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+
+function highlightTabLink(n) {
+  // This function highlights the corresponding tab link
+  var tabLinks = document.getElementsByClassName("tab-link");
+  for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove("active");
+  }
+  tabLinks[n-1].classList.add("active");
+  
+}
+// Modify the border color of the corresponding tab rectangle
+function highlightTabLink(n){
+var tabRectangles = document.getElementsByClassName("tab-rectangle");
+for (var j = 0; j < tabRectangles.length; j++) {
+    tabRectangles[j].classList.remove("active") // Reset border color for all tab rectangles
+}
+tabRectangles[n-1].classList.add("active");
+}
+/*function highlightTabLink(n) {
+  // This function highlights the corresponding tab link
+  var tabLinks = document.getElementsByClassName("tab-link");
+  for (var i = 0; i < tabLinks.length; i++) {
+    tabLinks[i].classList.remove("active");
+  }
+  // Highlight the last tab link when reaching the last section
+  if (n === document.getElementsByClassName("tab").length-1) {
+    tabLinks[tabLinks.length-1].classList.add("active");
+  } else {
+    tabLinks[n].classList.add("active");
+  }
+}*/
+
+
+
+function showTabLinks() {
+  // Show the tab links
+  var tabLinks = document.getElementsByClassName("tab-link");
+  for (var i = 0; i < tabLinks.length; i++) {
+    tabLinks[i].style.display = "inline-block";
+  }
+}
+
+function goToTab(n) {
+  // This function allows directly going to a specific tab
+  if (n >= 0 && n < document.getElementsByClassName("tab").length) {
+    currentTab = n;
+    showTab(currentTab);
+  }
+}
+
+
+/*-------------------------*/
+
+
+
+</script>
+
+</body>
+</html>
